@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ManagerScript : MonoBehaviour {
 
+
+
 	// Use this for initialization
 	void Start () {
 	
@@ -11,5 +13,11 @@ public class ManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void takePicture () {
+
+		Debug.Log("Taking Picture");
+
 	}
 }
