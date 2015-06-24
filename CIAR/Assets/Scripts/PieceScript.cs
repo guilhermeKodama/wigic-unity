@@ -48,7 +48,7 @@ public class PieceScript : MonoBehaviour {
 			}
 		}
 
-		if (getLine() == getSize()) {
+		if (getLine() == getSize()/2) {
 			back = true;
 		} else {
 		
@@ -89,7 +89,7 @@ public class PieceScript : MonoBehaviour {
 			}
 		}
 
-		if (getColumn() == getSize()) {
+		if (getColumn() == getSize()/2) {
 			right = true;
 		} else {
 		
