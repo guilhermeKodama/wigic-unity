@@ -9,15 +9,96 @@ public class ManagerScript : MonoBehaviour {
 	private bool takeScreenshot;
 	private CameraDevice.CameraDirection direction = CameraDevice.CameraDirection.CAMERA_BACK;
 
+	public GameObject menuPopUp;
+	public GameObject piece1;
+	public GameObject piece2;
+	public GameObject piece3;
+	public GameObject piece7;
+	public GameObject piece8;
+	public GameObject piece9;
+	public Material red;
+
+	/*Menu*/
+	public Canvas canvas;
+	public GameObject backgroundMenu;
+	public GameObject whale;
+	public GameObject horse;
+	public GameObject butterfly;
+	public GameObject menuSelector;
+	public bool menuIsMoving = false;
+	public bool menuUp = false;
+	/*Selector*/
+	public bool whaleWasClicked = false;
+	public bool horseWasClicked = false;
+	public bool butterflyWasClicked = false;
+
+
 	public void Start () {
 
-		CameraDevice.Instance.SetFocusMode(CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
 		takeScreenshot = false;
 
 	}
 	
 	public void Update () {
+		if (menuIsMoving) {
+			if (menuUp) {
+				backgroundMenu.transform.position = Vector3.Lerp (backgroundMenu.transform.position,
+			                                                 new Vector3 (backgroundMenu.transform.position.x, (float)(canvas.transform.position.y * 0.9), backgroundMenu.transform.position.z),
+			  		                                          0.1F);
 
+				butterfly.transform.position = Vector3.Lerp(butterfly.transform.position,
+				                                            new Vector3 (canvas.transform.position.x,butterfly.transform.position.y, butterfly.transform.position.z),
+				                                            0.1F);
+				horse.transform.position = Vector3.Lerp(horse.transform.position,
+				                                        new Vector3 (canvas.transform.position.x,horse.transform.position.y, horse.transform.position.z),
+				                                        	0.08F);
+				whale.transform.position = Vector3.Lerp(whale.transform.position,
+				                                        new Vector3 (canvas.transform.position.x,whale.transform.position.y, whale.transform.position.z),
+				                                            0.07F);
+
+				menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
+				                                               new Vector3 (canvas.transform.position.x,menuSelector.transform.position.y, menuSelector.transform.position.z),
+				                                        0.07F);
+
+			}else{
+				backgroundMenu.transform.position = Vector3.Lerp (backgroundMenu.transform.position,
+				                                                  new Vector3 (backgroundMenu.transform.position.x, (float)(canvas.transform.position.y * 0.5) * -1, backgroundMenu.transform.position.z
+				             ),
+				                                                  0.1F);
+
+				butterfly.transform.position = Vector3.Lerp(butterfly.transform.position,
+				                                            new Vector3 ((float)(canvas.transform.position.x * 2.5 ),butterfly.transform.position.y, butterfly.transform.position.z),
+				                                            0.1F);
+				horse.transform.position = Vector3.Lerp(horse.transform.position,
+				                                        new Vector3 ((float)(canvas.transform.position.x * 2.5 ),horse.transform.position.y, horse.transform.position.z),
+				                                        0.1F);
+				whale.transform.position = Vector3.Lerp(whale.transform.position,
+				                                        new Vector3 ((float)(canvas.transform.position.x * 2.5 ),whale.transform.position.y, whale.transform.position.z),
+				                                        0.1F);
+
+				menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
+				                                               new Vector3 ((float)(canvas.transform.position.x * 4.6 ),menuSelector.transform.position.y, menuSelector.transform.position.z),
+				                                               0.07F);
+			}
+		}
+
+		if (whaleWasClicked) {
+			menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
+			                                               whale.transform.position,
+			                                               0.2F);
+		}
+
+		if (horseWasClicked) {
+			menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
+			                                               horse.transform.position,
+			                                               0.2F);
+		}
+
+		if (butterflyWasClicked) {
+			menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
+			                                               butterfly.transform.position,
+			                                               0.2F);
+		}
 	}
 	
 	public void LateUpdate () {
@@ -42,7 +123,7 @@ public class ManagerScript : MonoBehaviour {
 		setTakeScreenshot (false);
 		CameraDevice.Instance.Stop ();
 		CameraDevice.Instance.Start ();
-		//		CameraDevice.Instance.SetFocusMode (CameraDevice.FocusMode.FOCUS_MODE_TRIGGERAUTO);
+		//CameraDevice.Instance.SetFocusMode (CameraDevice.FocusMode.FOCUS_MODE_TRIGGERAUTO);
 		
 	}
 	
@@ -59,4 +140,51 @@ public class ManagerScript : MonoBehaviour {
 			direction = CameraDevice.CameraDirection.CAMERA_BACK;
 		}
 	}
+
+	public void dowloadTargets(){
+		Application.OpenURL ("http://unity3d.com/");
+	}
+
+	public void showMenu(){
+		Debug.Log ("VOU MOSTRAR O MENU");
+		//menuPopUp.SetActive (!menuPopUp.activeSelf);
+
+		menuUp = !menuUp;
+		menuIsMoving = true;
+
+		/*piece1.GetComponent<MeshRenderer> ().material.color = Color.red;
+		piece2.GetComponent<MeshRenderer> ().material.color = Color.red;
+		piece3.GetComponent<MeshRenderer> ().material.color = Color.red;
+		piece7.GetComponent<MeshRenderer> ().material.color = Color.red;
+		piece8.GetComponent<MeshRenderer> ().material.color = Color.red;
+		piece9.GetComponent<MeshRenderer> ().material.color = Color.red;
+		piece1.GetComponent<MeshRenderer>().material = red;
+		piece2.GetComponent<MeshRenderer>().material = red;
+		piece3.GetComponent<MeshRenderer>().material = red;
+		piece7.GetComponent<MeshRenderer>().material = red;
+		piece8.GetComponent<MeshRenderer>().material = red;
+		piece9.GetComponent<MeshRenderer>().material = red;*/
+	}
+
+	/*MENU ITEM CLICK*/
+
+	public void onClickWhale(){
+		whaleWasClicked = true;
+		horseWasClicked = false;
+		butterflyWasClicked = false;
+	}
+
+	public void onClickHorse(){
+		horseWasClicked = true;
+		butterflyWasClicked = false;
+		whaleWasClicked = false;
+	}
+
+	public void onClickButterfly(){
+		butterflyWasClicked = true;
+		horseWasClicked = false;
+		whaleWasClicked = false;
+	}
+
+
 }
