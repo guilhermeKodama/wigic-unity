@@ -10,31 +10,33 @@ public class PieceScript : MonoBehaviour {
 	private bool left, right, back, forward;
 
 	public GameObject text;
+	private TextMesh texto;
 
 	// Use this for initialization
 	void Start () {
 
-		TextMesh texto = text.gameObject.GetComponent<TextMesh> ();
-		texto.text = getLine () + "-" + getColumn ();
+		texto = text.gameObject.GetComponent<TextMesh> ();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+	
+		texto.text = getLine () + "-" + getColumn ();
 
 		RaycastHit hit;
 
-		if (line == 1) {
+		if (getLine() == 1) {
 			forward = true;
 		} else {
 		
-			if (Physics.Raycast (new Ray (transform.position, Vector3.forward), out hit, getProximity())) {
+			if (Physics.Raycast (new Ray (transform.position, Vector3.forward), out hit, 300)) {
 				
 				if (hit.collider.tag == "Piece") {
 					PieceScript piece = hit.collider.gameObject.GetComponent<PieceScript> ();
 					
 					if (getColumn() == piece.getColumn() && (getLine() - piece.getLine()== 1) ) {
-						Debug.DrawRay (transform.position, Vector3.forward * proximity, Color.red);
+						Debug.DrawRay (transform.position, Vector3.forward * 300, Color.red);
 						forward = true;
 					} else {
 						forward = false;
@@ -46,16 +48,16 @@ public class PieceScript : MonoBehaviour {
 			}
 		}
 
-		if (line == size) {
+		if (getLine() == getSize()) {
 			back = true;
 		} else {
 		
-			if (Physics.Raycast (new Ray (transform.position, Vector3.back), out hit, getProximity())) {
+			if (Physics.Raycast (new Ray (transform.position, Vector3.back), out hit, 300)) {
 				if (hit.collider.tag == "Piece") {
 					PieceScript piece = hit.collider.gameObject.GetComponent<PieceScript> ();
 					
 					if (getColumn() == piece.getColumn() && (piece.getLine() - getLine() == 1) ) {
-						Debug.DrawRay (transform.position, Vector3.back * proximity, Color.red);
+						Debug.DrawRay (transform.position, Vector3.back * 300, Color.red);
 						back = true;
 					} else {
 						back = false;
@@ -66,17 +68,17 @@ public class PieceScript : MonoBehaviour {
 			}
 		}
 
-		if (column == 1) {
+		if (getColumn() == 1) {
 			left = true;
 		} else {
 		
-			if (Physics.Raycast (new Ray (transform.position, Vector3.left), out hit, getProximity())) {
+			if (Physics.Raycast (new Ray (transform.position, Vector3.left), out hit, 300)) {
 				
 				if (hit.collider.tag == "Piece") {
 					PieceScript piece = hit.collider.gameObject.GetComponent<PieceScript> ();
 					
 					if (getLine() == piece.getLine() && (getColumn() - piece.getColumn() == 1)) {
-						Debug.DrawRay (transform.position, Vector3.left * proximity, Color.red);
+						Debug.DrawRay (transform.position, Vector3.left * 300, Color.red);
 						left = true;
 					} else {
 						left = false;
@@ -87,17 +89,17 @@ public class PieceScript : MonoBehaviour {
 			}
 		}
 
-		if (column == size) {
+		if (getColumn() == getSize()) {
 			right = true;
 		} else {
 		
-			if (Physics.Raycast (new Ray (transform.position, Vector3.right), out hit, getProximity())) {
+			if (Physics.Raycast (new Ray (transform.position, Vector3.right), out hit, 300)) {
 				
 				if (hit.collider.tag == "Piece") {
 					PieceScript piece = hit.collider.gameObject.GetComponent<PieceScript> ();
 					
 					if (getLine() == piece.getLine() && (piece.getColumn() - getColumn() == 1)) {
-						Debug.DrawRay (transform.position, Vector3.right * proximity, Color.red);
+						Debug.DrawRay (transform.position, Vector3.right * 300, Color.red);
 						right = true;
 					} else {
 						right = false;
@@ -107,13 +109,6 @@ public class PieceScript : MonoBehaviour {
 			} else {
 				right = false;
 			}
-		}
-
-		if (isDone()) {
-			gameObject.GetComponent<MeshRenderer> ().material.color = Color.green;
-
-		} else {
-			gameObject.GetComponent<MeshRenderer> ().material.color = Color.red;
 		}
 
 	}
