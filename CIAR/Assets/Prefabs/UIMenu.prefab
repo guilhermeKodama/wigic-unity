@@ -173,7 +173,7 @@ GameObject:
   - 114: {fileID: 11406538}
   - 114: {fileID: 11467134}
   - 114: {fileID: 11437266}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - 222: {fileID: 22248686}
   - 212: {fileID: 21223340}
   - 114: {fileID: 11452764}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 416792}
   - 114: {fileID: 11437272}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 474478}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UIMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,8 +537,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.7732735, y: 315.559906, z: -33.5599022}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: .00499999989, y: .00499999989, z: .00499999989}
   m_Children: []
   m_Father: {fileID: 474478}
   m_RootOrder: 1
@@ -957,6 +957,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraButton: {fileID: 139934}
   switchCameremaButton: {fileID: 102468}
+  canvas: {fileID: 22364004}
+  backgroundMenu: {fileID: 150952}
+  whale: {fileID: 183124}
+  horse: {fileID: 103608}
+  butterfly: {fileID: 135404}
+  menuSelector: {fileID: 109094}
+  menuIsMoving: 0
+  menuUp: 0
+  whaleWasClicked: 0
+  horseWasClicked: 0
+  butterflyWasClicked: 0
+  piece: {fileID: 0}
+  spriteWhale: {fileID: 0}
+  spriteHorse: {fileID: 0}
+  spriteButterfly: {fileID: 0}
 --- !u!114 &11439916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1839,8 +1854,8 @@ RectTransform:
   m_RootOrder: 8
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 552.000061, y: 26}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: 552.000061, y: 29}
+  m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22411254
 RectTransform:
@@ -1992,8 +2007,8 @@ RectTransform:
   m_RootOrder: 9
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 552, y: 314}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: 552, y: 258}
+  m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22440840
 RectTransform:
@@ -2060,8 +2075,8 @@ RectTransform:
   m_RootOrder: 7
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 552, y: -269}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: 552, y: -200}
+  m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22464632
 RectTransform:
@@ -2288,7 +2303,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 740, y: 312}
+  m_AnchoredPosition: {x: 740, y: 258}
   m_SizeDelta: {x: 700, y: 224}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22493832
