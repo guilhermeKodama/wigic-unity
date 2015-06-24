@@ -11,6 +11,7 @@ public class ManagerScript : MonoBehaviour {
 
 	public void Start () {
 
+		CameraDevice.Instance.SetFocusMode(CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
 		takeScreenshot = false;
 
 	}
