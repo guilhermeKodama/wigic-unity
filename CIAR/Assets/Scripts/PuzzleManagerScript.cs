@@ -21,13 +21,13 @@ public class PuzzleManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 		foreach (GameObject pieceObj in pieces) {
 			PieceScript piece = pieceObj.gameObject.GetComponent<PieceScript>();
 			if (piece.isDone()) {
-				Debug.Log ("VENCEU!");
+				piece.gameObject.GetComponent<MeshRenderer> ().material.color = Color.green;
 			} else {
-				Debug.Log ("AINDA NÃO ACABOU!");
+				piece.gameObject.GetComponent<MeshRenderer> ().material.color = Color.red;
 			}
 		}
 
