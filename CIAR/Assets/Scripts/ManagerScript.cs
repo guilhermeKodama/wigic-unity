@@ -8,15 +8,7 @@ public class ManagerScript : MonoBehaviour {
 	public GameObject switchCameremaButton;
 	private bool takeScreenshot;
 	private CameraDevice.CameraDirection direction = CameraDevice.CameraDirection.CAMERA_BACK;
-
-	public GameObject menuPopUp;
-	public GameObject piece1;
-	public GameObject piece2;
-	public GameObject piece3;
-	public GameObject piece7;
-	public GameObject piece8;
-	public GameObject piece9;
-	public Material red;
+	
 
 	/*Menu*/
 	public Canvas canvas;
@@ -31,9 +23,20 @@ public class ManagerScript : MonoBehaviour {
 	public bool whaleWasClicked = false;
 	public bool horseWasClicked = false;
 	public bool butterflyWasClicked = false;
+	/*Change sprite render*/
+	public GameObject piece;
+	public GameObject spriteWhale;
+	public GameObject spriteHorse;
+	public GameObject spriteButterfly;
 
 
 	public void Start () {
+
+		/*if ((UnityEngine.iOS.Device.generation.ToString ()).IndexOf ("iPad") > -1) {
+			Debug.Log ("+++++++++++++++++++IS IPAD");
+		} else {
+			Debug.Log ("+++++++++++++++++++IS IPHONE");
+		}*/
 
 		takeScreenshot = false;
 
@@ -43,7 +46,7 @@ public class ManagerScript : MonoBehaviour {
 		if (menuIsMoving) {
 			if (menuUp) {
 				backgroundMenu.transform.position = Vector3.Lerp (backgroundMenu.transform.position,
-			                                                 new Vector3 (backgroundMenu.transform.position.x, (float)(canvas.transform.position.y * 0.9), backgroundMenu.transform.position.z),
+			                                                 new Vector3 (backgroundMenu.transform.position.x, (float)(canvas.transform.position.y * 0.85), backgroundMenu.transform.position.z),
 			  		                                          0.1F);
 
 				butterfly.transform.position = Vector3.Lerp(butterfly.transform.position,
@@ -62,7 +65,7 @@ public class ManagerScript : MonoBehaviour {
 
 			}else{
 				backgroundMenu.transform.position = Vector3.Lerp (backgroundMenu.transform.position,
-				                                                  new Vector3 (backgroundMenu.transform.position.x, (float)(canvas.transform.position.y * 0.5) * -1, backgroundMenu.transform.position.z
+				                                                  new Vector3 (backgroundMenu.transform.position.x, (float)(canvas.transform.position.y * 0.7) * -1, backgroundMenu.transform.position.z
 				             ),
 				                                                  0.1F);
 
@@ -172,18 +175,21 @@ public class ManagerScript : MonoBehaviour {
 		whaleWasClicked = true;
 		horseWasClicked = false;
 		butterflyWasClicked = false;
+		piece.GetComponent<SpriteRenderer> ().sprite = spriteWhale.GetComponent<SpriteRenderer>().sprite;
 	}
 
 	public void onClickHorse(){
 		horseWasClicked = true;
 		butterflyWasClicked = false;
 		whaleWasClicked = false;
+		piece.GetComponent<SpriteRenderer> ().sprite = spriteHorse.GetComponent<SpriteRenderer>().sprite;
 	}
 
 	public void onClickButterfly(){
 		butterflyWasClicked = true;
 		horseWasClicked = false;
 		whaleWasClicked = false;
+		piece.GetComponent<SpriteRenderer> ().sprite = spriteButterfly.GetComponent<SpriteRenderer>().sprite;
 	}
 
 
