@@ -37,7 +37,7 @@ public class ManagerScript : MonoBehaviour {
 		} else {
 			Debug.Log ("+++++++++++++++++++IS IPHONE");
 		}*/
-
+		CameraDevice.Instance.SetFocusMode (CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
 		takeScreenshot = false;
 
 	}

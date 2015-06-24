@@ -16,14 +16,12 @@ public class PieceScript : MonoBehaviour {
 	void Start () {
 
 		texto = text.gameObject.GetComponent<TextMesh> ();
-
+		texto.text = getLine () + "-" + getColumn ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
-		texto.text = getLine () + "-" + getColumn ();
-
 		RaycastHit hit;
 
 		if (getLine() == 1) {
@@ -48,7 +46,7 @@ public class PieceScript : MonoBehaviour {
 			}
 		}
 
-		if (getLine() == getSize()/2) {
+		if (getLine() == Mathf.Sqrt((float)getSize())) {
 			back = true;
 		} else {
 		
@@ -89,7 +87,7 @@ public class PieceScript : MonoBehaviour {
 			}
 		}
 
-		if (getColumn() == getSize()/2) {
+		if (getColumn() == Mathf.Sqrt((float)getSize())) {
 			right = true;
 		} else {
 		
@@ -116,6 +114,7 @@ public class PieceScript : MonoBehaviour {
 	public bool isDone () {
 
 		if (right && left && back && forward) {
+			texto.text = "OK";
 			return true;
 		}
 		return false;
