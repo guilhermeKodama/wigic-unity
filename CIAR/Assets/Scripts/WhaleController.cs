@@ -88,7 +88,7 @@ public class WhaleController : MonoBehaviour {
 
 	void Update(){
 
-		Debug.Log (Vector3.Distance(transform.position,points[destPoint].position));
+//		Debug.Log (Vector3.Distance(transform.position,points[destPoint].position));
 
 		// Choose the next destination point when the agent gets
 		// close to the current one.
