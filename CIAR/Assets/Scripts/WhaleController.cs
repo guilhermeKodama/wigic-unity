@@ -2,27 +2,38 @@
 using System.Collections;
 
 public class WhaleController : MonoBehaviour {
-
-	private Transform cube;
+	
 
 	private Rigidbody rb;
 	private NavMeshAgent nav;
-	public float speed;
 	public float tumble;
 
 	public GameObject meshChild;
 
+
+
+
+	/*MOVEMENT*/
+	private float speed;
+	private float maxSpeed;
+	private float acceleration;
+	/*MOVIMENTO DE DESLOCAMENTO*/
+	public float whaleWaveMovementAngle;
+	private float whaleWaveDirection;
+	private float whaleWaveMovementSpeed;
+	/*MOVEMENT POSITIONS*/
 	public Transform[] points;
 	private int destPoint = 0;
-
-
-
+	
 	void Start(){
-		rb = GetComponent<Rigidbody> ();
-		nav = GetComponent<NavMeshAgent> ();
-		nav.autoBraking = false;
+		speed = 1F;
+		maxSpeed = 2F;
+		acceleration = 1.01F;
 
-		cube = GameObject.FindGameObjectWithTag ("Cube").transform;
+		whaleWaveMovementAngle = 0;
+		whaleWaveDirection = 1F;
+		whaleWaveMovementSpeed = 0.04F;
+
 
 		GotoNextPoint();
 	}
@@ -31,40 +42,63 @@ public class WhaleController : MonoBehaviour {
 		// Returns if no points have been set up
 		if (points.Length == 0)
 			return;
-		
-		// Set the agent to go to the currently selected destination.
-		nav.destination = points[destPoint].position;
-		
+
 		// Choose the next point in the array as the destination,
 		// cycling to the start if necessary.
 		destPoint = (destPoint + 1) % points.Length;
+
+	}
+
+	void Swim(){
+		Transform cube = points[destPoint];
+		
+
+		Vector3 cubePosition = new Vector3 (cube.position.x, cube.position.y, cube.position.z);
+		
+		
+		/* Anguling whale movement
+		Debug.Log(Vector3.Angle (transform.position, cube.transform.position));
+			
+
+		if (whaleWaveMovementAngle >= 5 || whaleWaveMovementAngle <= -5) {
+			whaleWaveDirection *= -1F;
+		}	
+
+		whaleWaveMovementAngle = whaleWaveMovementAngle + (whaleWaveMovementSpeed * whaleWaveDirection) ;
+		cubePosition = new Vector3 (cube.position.x, cube.position.y + whaleWaveMovementAngle, cube.position.z);
+		*/
+		
+		
+		// Direccion: definimos el vector direccion hacia el cual nos vamos a mover (restamos posicion objetivo - posicion nuestra)
+		Vector3 direccion = cubePosition - transform.position;
+		// Movimiento:_Son "nuevas posiciones" cada vez mas cercanas al objetivo.
+		// normalizar el vector es como obtener en lugar de toda la ruta, en que direccion tiene que dar "cada pequeño paso"
+		// al multiplicar por la velocidad, determinamos que tan "largo" es ese paso.
+		// usamos time.deltatime para que tenga un movimiento smooth respecto de los frames.
+		
+		/*if (speed < maxSpeed) {
+			speed *= acceleration;
+		}*/
+		
+		Vector3 movimento = direccion.normalized * speed * Time.deltaTime;
+		
+		transform.LookAt(cubePosition);
+		transform.position = transform.position + movimento;
 	}
 
 	void Update(){
 
+		Debug.Log (Vector3.Distance(transform.position,points[destPoint].position));
+
 		// Choose the next destination point when the agent gets
 		// close to the current one.
-		if (nav.remainingDistance < 2.5f) {
-			GotoNextPoint();
+		if (Vector3.Distance(transform.position,points[destPoint].position) < 1F) {
+			GotoNextPoint ();
 		}
+
+		Swim ();
+
 			
 	}
-	
 
-	void FixedUpdate(){
-
-		/*Input*
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
-
-		Vector3 movement = new Vector3 (moveHorizontal,0.0f,moveVertical);
-
-		rb.AddForce (movement);*/
-
-		/*Rotation*/
-		//transform.Rotate (new Vector3 (15, 30, 45) * Time.deltaTime);
-
-		/*AI Movement*/
-
-	}
 }
