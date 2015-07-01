@@ -14,7 +14,7 @@ public class WhaleController : MonoBehaviour {
 
 
 	/*MOVEMENT*/
-	private float speed;
+	public float speed;
 	private float maxSpeed;
 	private float acceleration;
 	/*MOVIMENTO DE DESLOCAMENTO*/
@@ -26,7 +26,6 @@ public class WhaleController : MonoBehaviour {
 	private int destPoint = 0;
 	
 	void Start(){
-		speed = 1F;
 		maxSpeed = 2F;
 		acceleration = 1.01F;
 
@@ -81,14 +80,15 @@ public class WhaleController : MonoBehaviour {
 		}*/
 		
 		Vector3 movimento = direccion.normalized * speed * Time.deltaTime;
-		
-		transform.LookAt(cubePosition);
+		transform.LookAt (cube.transform);
 		transform.position = transform.position + movimento;
+
+		//Rotate trow the target direction
+		//Quaternion targetRotation = Quaternion.LookRotation(cube.position - transform.position, Vector3.up);
+		//transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.1F * Time.deltaTime);
 	}
 
 	void Update(){
-
-//		Debug.Log (Vector3.Distance(transform.position,points[destPoint].position));
 
 		// Choose the next destination point when the agent gets
 		// close to the current one.
