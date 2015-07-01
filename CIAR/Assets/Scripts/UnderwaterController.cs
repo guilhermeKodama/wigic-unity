@@ -11,9 +11,18 @@ public class UnderwaterController : MonoBehaviour, ITrackableEventHandler {
 	/*Criar sensação de estar debaixo dagua*/
 	private Color normalColor;
 	private Color underwaterColor;
+
+	private TrackableBehaviour mTrackableBehaviour;
 	
 
 	void Start () {
+
+		mTrackableBehaviour = GetComponent<TrackableBehaviour>();
+		if (mTrackableBehaviour){
+
+			mTrackableBehaviour.RegisterTrackableEventHandler(this);
+		}
+
 		/*Underwater Effect*/
 		normalColor = new Color (0.5f,0.5f,0.5f);
 		underwaterColor = new Color (0.22f,0.65f,0.77f,0.5f);
@@ -26,6 +35,7 @@ public class UnderwaterController : MonoBehaviour, ITrackableEventHandler {
 
 
 	public void OnTrackableStateChanged (TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status newStatus) {
+
 
 		Debug.Log ("PREVIOUS: " + previousStatus + " - " + "NEW: " + newStatus);
 
