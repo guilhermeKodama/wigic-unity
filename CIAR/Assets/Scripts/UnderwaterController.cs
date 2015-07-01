@@ -11,6 +11,7 @@ public class UnderwaterController : MonoBehaviour, ITrackableEventHandler {
 	/*Criar sensação de estar debaixo dagua*/
 	private Color normalColor;
 	private Color underwaterColor;
+	
 
 	void Start () {
 		/*Underwater Effect*/
@@ -19,6 +20,8 @@ public class UnderwaterController : MonoBehaviour, ITrackableEventHandler {
 
 		trackable = (TrackableBehaviour)UnityEngine.Object.FindObjectOfType(typeof(TrackableBehaviour));
 		trackable.RegisterTrackableEventHandler(this);
+
+		GameObject.FindGameObjectWithTag("Whale").GetComponent<AudioSource>().enabled = false;
 	}
 
 
@@ -33,6 +36,8 @@ public class UnderwaterController : MonoBehaviour, ITrackableEventHandler {
 			RenderSettings.fogColor = normalColor;
 			RenderSettings.fogDensity = 0;
 
+			GameObject.FindGameObjectWithTag("Whale").GetComponent<AudioSource>().enabled = false;
+
 		}
 
 		if (newStatus == TrackableBehaviour.Status.TRACKED || newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED) {
@@ -41,6 +46,8 @@ public class UnderwaterController : MonoBehaviour, ITrackableEventHandler {
 			RenderSettings.fog = true;
 			RenderSettings.fogColor = underwaterColor;
 			RenderSettings.fogDensity = 0.03f;
+
+			GameObject.FindGameObjectWithTag("Whale").GetComponent<AudioSource>().enabled = true;
 			
 		}
 

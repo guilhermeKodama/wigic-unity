@@ -236,6 +236,14 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 14.8999996
       objectReference: {fileID: 0}
+    - target: {fileID: 188808, guid: 6c73c86b8cd0b4380a1ae37dcb0db35f, type: 2}
+      propertyPath: m_TagString
+      value: Whale
+      objectReference: {fileID: 0}
+    - target: {fileID: 8235278, guid: 6c73c86b8cd0b4380a1ae37dcb0db35f, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c73c86b8cd0b4380a1ae37dcb0db35f, type: 2}
   m_IsPrefabParent: 0
