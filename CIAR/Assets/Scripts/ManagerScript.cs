@@ -28,6 +28,10 @@ public class ManagerScript : MonoBehaviour {
 	public GameObject spriteWhale;
 	public GameObject spriteHorse;
 	public GameObject spriteButterfly;
+	/*3D objects*/
+	public GameObject whale3D;
+	public GameObject horse3D;
+	public GameObject butterfly3D;
 
 
 	public void Start () {
@@ -176,6 +180,10 @@ public class ManagerScript : MonoBehaviour {
 		horseWasClicked = false;
 		butterflyWasClicked = false;
 		piece.GetComponent<SpriteRenderer> ().sprite = spriteWhale.GetComponent<SpriteRenderer>().sprite;
+
+		whale3D.SetActive (true);
+		horse3D.SetActive (false);
+		butterfly3D.SetActive (false);
 	}
 
 	public void onClickHorse(){
@@ -183,6 +191,10 @@ public class ManagerScript : MonoBehaviour {
 		butterflyWasClicked = false;
 		whaleWasClicked = false;
 		piece.GetComponent<SpriteRenderer> ().sprite = spriteHorse.GetComponent<SpriteRenderer>().sprite;
+
+		whale3D.SetActive (false);
+		horse3D.SetActive (true);
+		butterfly3D.SetActive (false);
 	}
 
 	public void onClickButterfly(){
@@ -190,6 +202,10 @@ public class ManagerScript : MonoBehaviour {
 		horseWasClicked = false;
 		whaleWasClicked = false;
 		piece.GetComponent<SpriteRenderer> ().sprite = spriteButterfly.GetComponent<SpriteRenderer>().sprite;
+
+		whale3D.SetActive (false);
+		horse3D.SetActive (false);
+		butterfly3D.SetActive (true);
 	}
 
 
