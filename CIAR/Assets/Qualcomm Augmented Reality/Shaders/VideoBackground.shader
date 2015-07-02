@@ -11,6 +11,7 @@ Shader "Custom/VideoBackground" {
             ZWrite Off
             Cull Off
             Lighting Off
+            Fog {Mode Off}
             
             SetTexture [_MainTex] {
                 combine texture 
