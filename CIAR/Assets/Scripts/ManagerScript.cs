@@ -149,7 +149,7 @@ public class ManagerScript : MonoBehaviour {
 	}
 
 	public void dowloadTargets(){
-		Application.OpenURL ("http://unity3d.com/");
+		Application.OpenURL ("http://173.255.205.14/wigic/");
 	}
 
 	public void showMenu(){
