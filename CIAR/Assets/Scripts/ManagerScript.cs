@@ -137,13 +137,19 @@ public class ManagerScript : MonoBehaviour {
 	public void switchCamera () {
 		if (direction == CameraDevice.CameraDirection.CAMERA_BACK) {
 			CameraDevice.Instance.Stop ();
+			CameraDevice.Instance.Deinit();
+			TrackerManager.Instance.GetTracker<ObjectTracker>().Stop();
 			CameraDevice.Instance.Init (CameraDevice.CameraDirection.CAMERA_FRONT);
 			CameraDevice.Instance.Start ();
+			TrackerManager.Instance.GetTracker<ObjectTracker>().Start();
 			direction = CameraDevice.CameraDirection.CAMERA_FRONT;
 		} else {
 			CameraDevice.Instance.Stop ();
+			CameraDevice.Instance.Deinit();
+			TrackerManager.Instance.GetTracker<ObjectTracker>().Stop();
 			CameraDevice.Instance.Init (CameraDevice.CameraDirection.CAMERA_BACK);
 			CameraDevice.Instance.Start ();
+			TrackerManager.Instance.GetTracker<ObjectTracker>().Start();
 			direction = CameraDevice.CameraDirection.CAMERA_BACK;
 		}
 	}
