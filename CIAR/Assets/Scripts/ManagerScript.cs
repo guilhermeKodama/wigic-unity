@@ -84,9 +84,9 @@ public class ManagerScript : MonoBehaviour {
 		Debug.Log (settingsSelector.transform.localPosition);
 
 		if (settingsWasClicked) {
-			settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D = Vector3.Lerp (settingsSelectorPosition, new Vector3 (-177f, -177f, settingsSelectorPosition.z), 0.1f);
+			settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D = Vector3.Lerp (settingsSelectorPosition, new Vector3 (-480f, -480f, settingsSelectorPosition.z), 0.1f);
 		} else {
-			settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D = Vector3.Lerp (settingsSelectorPosition, new Vector3 (0f, 0f, settingsSelectorPosition.z), 0.1f);
+			settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D = Vector3.Lerp (settingsSelectorPosition, new Vector3 (-100f, -100f, settingsSelectorPosition.z), 0.1f);
 		}
 
 		if (whaleWasClicked) {
@@ -154,8 +154,8 @@ public class ManagerScript : MonoBehaviour {
 		}
 	}
 
-	public void dowloadTargets(){
-		Application.OpenURL ("http://173.255.205.14/wigic/");
+	public void onClickDownload(){
+		Application.OpenURL ("http://www.wigic.io/");
 	}
 
 	public void onClickMenu(){
