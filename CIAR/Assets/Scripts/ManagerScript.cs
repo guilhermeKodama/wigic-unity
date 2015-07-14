@@ -5,24 +5,25 @@ using Vuforia;
 public class ManagerScript : MonoBehaviour {
 	
 	public GameObject cameraButton;
-	public GameObject switchCameremaButton;
+	public GameObject switchButton;
 	private bool takeScreenshot;
 	private CameraDevice.CameraDirection direction = CameraDevice.CameraDirection.CAMERA_BACK;
 	
 
 	/*Menu*/
 	public Canvas canvas;
-	public GameObject backgroundMenu;
+	public GameObject background;
 	public GameObject whale;
 	public GameObject horse;
 	public GameObject butterfly;
+	public GameObject animalSelector;
 	public GameObject menuSelector;
-	public bool menuIsMoving = false;
-	public bool menuUp = false;
+	private bool menuIsMoving = false;
+	private bool menuUp = false;
 	/*Selector*/
-	public bool whaleWasClicked = false;
-	public bool horseWasClicked = false;
-	public bool butterflyWasClicked = false;
+	private bool whaleWasClicked = false;
+	private bool horseWasClicked = false;
+	private bool butterflyWasClicked = false;
 	/*Change sprite render*/
 	public GameObject piece;
 	public GameObject spriteWhale;
@@ -41,6 +42,7 @@ public class ManagerScript : MonoBehaviour {
 		} else {
 			Debug.Log ("+++++++++++++++++++IS IPHONE");
 		}*/
+		menuSelector.SetActive (false);
 		CameraDevice.Instance.SetFocusMode (CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
 		takeScreenshot = false;
 
@@ -49,60 +51,61 @@ public class ManagerScript : MonoBehaviour {
 	public void Update () {
 		if (menuIsMoving) {
 			if (menuUp) {
-				backgroundMenu.transform.position = Vector3.Lerp (backgroundMenu.transform.position,
-			                                                 new Vector3 (backgroundMenu.transform.position.x, (float)(canvas.transform.position.y * 0.85), backgroundMenu.transform.position.z),
+				background.GetComponent<RectTransform>().localPosition = Vector3.Lerp (background.transform.localPosition,
+			                                                 new Vector3 (background.transform.localPosition.x, (float)(canvas.transform.position.y * 0.1) * -1, background.transform.localPosition.z),
 			  		                                          0.1F);
 
-				butterfly.transform.position = Vector3.Lerp(butterfly.transform.position,
-				                                            new Vector3 (canvas.transform.position.x,butterfly.transform.position.y, butterfly.transform.position.z),
+				butterfly.transform.localPosition = Vector3.Lerp(butterfly.transform.localPosition,
+				                                            new Vector3 (butterfly.transform.localPosition.x, -40f, butterfly.transform.localPosition.z),
 				                                            0.1F);
-				horse.transform.position = Vector3.Lerp(horse.transform.position,
-				                                        new Vector3 (canvas.transform.position.x,horse.transform.position.y, horse.transform.position.z),
-				                                        	0.08F);
-				whale.transform.position = Vector3.Lerp(whale.transform.position,
-				                                        new Vector3 (canvas.transform.position.x,whale.transform.position.y, whale.transform.position.z),
-				                                            0.07F);
+				horse.transform.localPosition = Vector3.Lerp(horse.transform.position,
+				                                        new Vector3 (horse.transform.localPosition.x, -40f, horse.transform.localPosition.z),
+				                                        	0.1F);
+				whale.transform.localPosition = Vector3.Lerp(whale.transform.position,
+				                                        new Vector3 (whale.transform.localPosition.x, -40f, whale.transform.localPosition.z),
+				                                            0.1F);
 
-				menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
-				                                               new Vector3 (canvas.transform.position.x,menuSelector.transform.position.y, menuSelector.transform.position.z),
-				                                        0.07F);
+				animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.localPosition,
+				                                               new Vector3 (animalSelector.transform.localPosition.x, -40f, animalSelector.transform.localPosition.z),
+				                                        0.08F);
 
-			}else{
-				backgroundMenu.transform.position = Vector3.Lerp (backgroundMenu.transform.position,
-				                                                  new Vector3 (backgroundMenu.transform.position.x, (float)(canvas.transform.position.y * 0.7) * -1, backgroundMenu.transform.position.z
+			} else {
+				background.GetComponent<RectTransform>().localPosition = Vector3.Lerp (background.transform.localPosition,
+				                                                  new Vector3 (background.transform.localPosition.x, (float)(canvas.transform.position.y * 0.7), background.transform.localPosition.z
 				             ),
 				                                                  0.1F);
 
-				butterfly.transform.position = Vector3.Lerp(butterfly.transform.position,
-				                                            new Vector3 ((float)(canvas.transform.position.x * 2.5 ),butterfly.transform.position.y, butterfly.transform.position.z),
+				butterfly.transform.localPosition = Vector3.Lerp(butterfly.transform.position,
+				                                            new Vector3 (butterfly.transform.localPosition.x, (float)(canvas.transform.position.y * 2.5 ), butterfly.transform.localPosition.z),
 				                                            0.1F);
-				horse.transform.position = Vector3.Lerp(horse.transform.position,
-				                                        new Vector3 ((float)(canvas.transform.position.x * 2.5 ),horse.transform.position.y, horse.transform.position.z),
+				horse.transform.localPosition = Vector3.Lerp(horse.transform.localPosition,
+				                                             new Vector3 (horse.transform.localPosition.x, (float)(canvas.transform.position.y * 2.5 ), horse.transform.localPosition.z),
 				                                        0.1F);
-				whale.transform.position = Vector3.Lerp(whale.transform.position,
-				                                        new Vector3 ((float)(canvas.transform.position.x * 2.5 ),whale.transform.position.y, whale.transform.position.z),
+				whale.transform.localPosition = Vector3.Lerp(whale.transform.position,
+				                                        new Vector3 (whale.transform.localPosition.x, (float)(canvas.transform.position.y * 2.5 ), whale.transform.localPosition.z),
 				                                        0.1F);
 
-				menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
-				                                               new Vector3 ((float)(canvas.transform.position.x * 4.6 ),menuSelector.transform.position.y, menuSelector.transform.position.z),
-				                                               0.07F);
+				animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.localPosition,
+				                                               new Vector3 (animalSelector.transform.localPosition.x, (float)(canvas.transform.position.y * 4.6 ), animalSelector.transform.localPosition.z),
+				                                               0.08F);
+
 			}
 		}
 
 		if (whaleWasClicked) {
-			menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
-			                                               whale.transform.position,
+			animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.localPosition,
+			                                               whale.transform.localPosition,
 			                                               0.2F);
 		}
 
 		if (horseWasClicked) {
-			menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
-			                                               horse.transform.position,
+			animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.localPosition,
+			                                                      horse.transform.localPosition,
 			                                               0.2F);
 		}
 
 		if (butterflyWasClicked) {
-			menuSelector.transform.position = Vector3.Lerp(menuSelector.transform.position,
+			animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.position,
 			                                               butterfly.transform.position,
 			                                               0.2F);
 		}
@@ -123,10 +126,10 @@ public class ManagerScript : MonoBehaviour {
 	public void takePicture () {
 		Debug.Log ("Taking Picture");
 		cameraButton.SetActive (false);
-		switchCameremaButton.SetActive (false);
+		switchButton.SetActive (false);
 		Application.CaptureScreenshot ("Screenshot.jpeg", 4);
 		cameraButton.SetActive (true);
-		switchCameremaButton.SetActive (true);
+		switchButton.SetActive (true);
 		setTakeScreenshot (false);
 		CameraDevice.Instance.Stop ();
 		CameraDevice.Instance.Start ();
@@ -158,28 +161,19 @@ public class ManagerScript : MonoBehaviour {
 		Application.OpenURL ("http://173.255.205.14/wigic/");
 	}
 
-	public void showMenu(){
+	public void onClickMenu(){
 		Debug.Log ("VOU MOSTRAR O MENU");
 		//menuPopUp.SetActive (!menuPopUp.activeSelf);
-
 		menuUp = !menuUp;
 		menuIsMoving = true;
-
-		/*piece1.GetComponent<MeshRenderer> ().material.color = Color.red;
-		piece2.GetComponent<MeshRenderer> ().material.color = Color.red;
-		piece3.GetComponent<MeshRenderer> ().material.color = Color.red;
-		piece7.GetComponent<MeshRenderer> ().material.color = Color.red;
-		piece8.GetComponent<MeshRenderer> ().material.color = Color.red;
-		piece9.GetComponent<MeshRenderer> ().material.color = Color.red;
-		piece1.GetComponent<MeshRenderer>().material = red;
-		piece2.GetComponent<MeshRenderer>().material = red;
-		piece3.GetComponent<MeshRenderer>().material = red;
-		piece7.GetComponent<MeshRenderer>().material = red;
-		piece8.GetComponent<MeshRenderer>().material = red;
-		piece9.GetComponent<MeshRenderer>().material = red;*/
+		menuSelector.SetActive(true);
 	}
 
 	/*MENU ITEM CLICK*/
+	
+	public void onClickOptions(){
+		Debug.Log ("OnClickOptions");
+	}
 
 	public void onClickWhale(){
 		whaleWasClicked = true;
