@@ -202,5 +202,11 @@ public class ManagerScript : MonoBehaviour {
 		butterfly3D.SetActive (true);
 	}
 
+	public void OnSwipeDown() {
+		if (menuUp) {
+			menuUp = !menuUp;
+			menuIsMoving = true;
+		}
+	}
 
 }
