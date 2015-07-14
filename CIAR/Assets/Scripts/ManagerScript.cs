@@ -8,7 +8,6 @@ public class ManagerScript : MonoBehaviour {
 	public GameObject switchButton;
 	private bool takeScreenshot;
 	private CameraDevice.CameraDirection direction = CameraDevice.CameraDirection.CAMERA_BACK;
-	
 
 	/*Menu*/
 	public Canvas canvas;
@@ -18,8 +17,10 @@ public class ManagerScript : MonoBehaviour {
 	public GameObject butterfly;
 	public GameObject animalSelector;
 	public GameObject menuSelector;
+	public GameObject settingsSelector;
 	private bool menuIsMoving = false;
 	private bool menuUp = false;
+	private bool settingsWasClicked = false;
 	/*Selector*/
 	private bool whaleWasClicked = false;
 	private bool horseWasClicked = false;
@@ -34,80 +35,76 @@ public class ManagerScript : MonoBehaviour {
 	public GameObject horse3D;
 	public GameObject butterfly3D;
 
+	private Vector3 backgroundPosition;
+	private Vector3 butterflyPosition;
+	private Vector3 horsePosition;
+	private Vector3 whalePosition;
+	private Vector3 animalSelectorPosition;
+	private Vector3 settingsSelectorPosition;
+
 
 	public void Start () {
-
-		/*if ((UnityEngine.iOS.Device.generation.ToString ()).IndexOf ("iPad") > -1) {
-			Debug.Log ("+++++++++++++++++++IS IPAD");
-		} else {
-			Debug.Log ("+++++++++++++++++++IS IPHONE");
-		}*/
 		menuSelector.SetActive (false);
 		CameraDevice.Instance.SetFocusMode (CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
 		takeScreenshot = false;
 
 	}
-	
+
 	public void Update () {
+
+		backgroundPosition = background.GetComponent<RectTransform>().anchoredPosition3D;
+		butterflyPosition = butterfly.GetComponent<RectTransform>().anchoredPosition3D;
+		horsePosition = horse.GetComponent<RectTransform>().anchoredPosition3D;
+		whalePosition = whale.GetComponent<RectTransform>().anchoredPosition3D;
+		animalSelectorPosition = animalSelector.GetComponent<RectTransform>().anchoredPosition3D;
+		settingsSelectorPosition = settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D;
+
 		if (menuIsMoving) {
 			if (menuUp) {
-				background.GetComponent<RectTransform>().localPosition = Vector3.Lerp (background.transform.localPosition,
-			                                                 new Vector3 (background.transform.localPosition.x, (float)(canvas.transform.position.y * 0.1) * -1, background.transform.localPosition.z),
-			  		                                          0.1F);
 
-				butterfly.transform.localPosition = Vector3.Lerp(butterfly.transform.localPosition,
-				                                            new Vector3 (butterfly.transform.localPosition.x, -40f, butterfly.transform.localPosition.z),
-				                                            0.1F);
-				horse.transform.localPosition = Vector3.Lerp(horse.transform.position,
-				                                        new Vector3 (horse.transform.localPosition.x, -40f, horse.transform.localPosition.z),
-				                                        	0.1F);
-				whale.transform.localPosition = Vector3.Lerp(whale.transform.position,
-				                                        new Vector3 (whale.transform.localPosition.x, -40f, whale.transform.localPosition.z),
-				                                            0.1F);
-
-				animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.localPosition,
-				                                               new Vector3 (animalSelector.transform.localPosition.x, -40f, animalSelector.transform.localPosition.z),
-				                                        0.08F);
+				background.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp (backgroundPosition, new Vector3 (backgroundPosition.x, 988f, backgroundPosition.z), 0.1f);
+				butterfly.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(butterflyPosition, new Vector3 (butterflyPosition.x, 599f, butterflyPosition.z), 0.1f);
+				horse.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(horsePosition, new Vector3 (horsePosition.x, 599f, horsePosition.z), 0.1f);
+				whale.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(whalePosition, new Vector3 (whalePosition.x, 599f, whalePosition.z), 0.1f);
+				animalSelector.GetComponent<RectTransform>().anchoredPosition3D = 	Vector3.Lerp(animalSelectorPosition, new Vector3 (animalSelectorPosition.x, 639f, animalSelectorPosition.z), 0.1f);
+				menuSelector.SetActive(true);
 
 			} else {
-				background.GetComponent<RectTransform>().localPosition = Vector3.Lerp (background.transform.localPosition,
-				                                                  new Vector3 (background.transform.localPosition.x, (float)(canvas.transform.position.y * 0.7), background.transform.localPosition.z
-				             ),
-				                                                  0.1F);
 
-				butterfly.transform.localPosition = Vector3.Lerp(butterfly.transform.position,
-				                                            new Vector3 (butterfly.transform.localPosition.x, (float)(canvas.transform.position.y * 2.5 ), butterfly.transform.localPosition.z),
-				                                            0.1F);
-				horse.transform.localPosition = Vector3.Lerp(horse.transform.localPosition,
-				                                             new Vector3 (horse.transform.localPosition.x, (float)(canvas.transform.position.y * 2.5 ), horse.transform.localPosition.z),
-				                                        0.1F);
-				whale.transform.localPosition = Vector3.Lerp(whale.transform.position,
-				                                        new Vector3 (whale.transform.localPosition.x, (float)(canvas.transform.position.y * 2.5 ), whale.transform.localPosition.z),
-				                                        0.1F);
-
-				animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.localPosition,
-				                                               new Vector3 (animalSelector.transform.localPosition.x, (float)(canvas.transform.position.y * 4.6 ), animalSelector.transform.localPosition.z),
-				                                               0.08F);
+				background.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp (backgroundPosition, new Vector3 (backgroundPosition.x, 0f, backgroundPosition.z), 0.1f);
+				butterfly.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(butterflyPosition, new Vector3 (butterflyPosition.x, -40f, butterflyPosition.z), 0.1f);
+				horse.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(horsePosition, new Vector3 (horsePosition.x, -40f, horsePosition.z), 0.1f);
+				whale.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(whalePosition, new Vector3 (whalePosition.x, -40f, whalePosition.z), 0.1f);
+				animalSelector.GetComponent<RectTransform>().anchoredPosition3D = 	Vector3.Lerp(animalSelectorPosition, new Vector3 (animalSelectorPosition.x, 0f, animalSelectorPosition.z), 0.1f);
+				menuSelector.SetActive(false);
 
 			}
 		}
 
+		Debug.Log (settingsSelector.transform.localPosition);
+
+		if (settingsWasClicked) {
+			settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D = Vector3.Lerp (settingsSelectorPosition, new Vector3 (-177f, -177f, settingsSelectorPosition.z), 0.1f);
+		} else {
+			settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D = Vector3.Lerp (settingsSelectorPosition, new Vector3 (0f, 0f, settingsSelectorPosition.z), 0.1f);
+		}
+
 		if (whaleWasClicked) {
-			animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.localPosition,
-			                                               whale.transform.localPosition,
-			                                               0.2F);
+			animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition,
+			                                                      whalePosition,
+			                                               		  0.2f);
 		}
 
 		if (horseWasClicked) {
-			animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.localPosition,
-			                                                      horse.transform.localPosition,
-			                                               0.2F);
+			animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition,
+			                                                      horsePosition,
+			                                                      0.2f);
 		}
 
 		if (butterflyWasClicked) {
-			animalSelector.transform.localPosition = Vector3.Lerp(animalSelector.transform.position,
-			                                               butterfly.transform.position,
-			                                               0.2F);
+			animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition,
+			                                                      butterflyPosition,
+			                                                      0.2f);
 		}
 	}
 	
@@ -162,17 +159,14 @@ public class ManagerScript : MonoBehaviour {
 	}
 
 	public void onClickMenu(){
-		Debug.Log ("VOU MOSTRAR O MENU");
-		//menuPopUp.SetActive (!menuPopUp.activeSelf);
 		menuUp = !menuUp;
 		menuIsMoving = true;
-		menuSelector.SetActive(true);
 	}
 
 	/*MENU ITEM CLICK*/
 	
-	public void onClickOptions(){
-		Debug.Log ("OnClickOptions");
+	public void onClickSettings(){
+		settingsWasClicked = !settingsWasClicked;
 	}
 
 	public void onClickWhale(){
