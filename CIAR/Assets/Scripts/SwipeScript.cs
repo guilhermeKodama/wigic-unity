@@ -61,6 +61,7 @@ public class SwipeScript : MonoBehaviour {
 								GameObject.Find("WigManager").GetComponent<WigManagerScript>().SendMessage("OnSwipeUp");
 							}  else {
 								GameObject.Find("WigManager").GetComponent<WigManagerScript>().SendMessage("OnSwipeDown");
+								GameObject.FindWithTag("MenuManager").GetComponent<ManagerScript>().SendMessage("OnSwipeDown");
 							}
 						}
 					}
