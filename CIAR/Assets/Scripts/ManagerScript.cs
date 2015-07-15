@@ -62,41 +62,41 @@ public class ManagerScript : MonoBehaviour {
 		if (menuIsMoving) {
 			if (menuUp) {
 
-				background.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp (backgroundPosition, new Vector3 (backgroundPosition.x, 988f, backgroundPosition.z), 0.1f);
-				butterfly.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(butterflyPosition, new Vector3 (butterflyPosition.x, 599f, butterflyPosition.z), 0.1f);
-				horse.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(horsePosition, new Vector3 (horsePosition.x, 599f, horsePosition.z), 0.1f);
-				whale.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(whalePosition, new Vector3 (whalePosition.x, 599f, whalePosition.z), 0.1f);
-				animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3 (animalSelectorPosition.x, 639f, animalSelectorPosition.z), 0.1f);
+				background.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp (backgroundPosition, new Vector3 (backgroundPosition.x, 1036f, backgroundPosition.z), 0.1f);
+				butterfly.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(butterflyPosition, new Vector3 (butterflyPosition.x, 600f, butterflyPosition.z), 0.1f);
+				horse.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(horsePosition, new Vector3 (horsePosition.x, 600f, horsePosition.z), 0.1f);
+				whale.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(whalePosition, new Vector3 (whalePosition.x, 600f, whalePosition.z), 0.1f);
+				animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3 (animalSelectorPosition.x, 600f, animalSelectorPosition.z), 0.1f);
 				menuSelector.SetActive(true);
 
 			} else {
 
 				background.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp (backgroundPosition, new Vector3 (backgroundPosition.x, 0f, backgroundPosition.z), 0.1f);
-				butterfly.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(butterflyPosition, new Vector3 (butterflyPosition.x, -40f, butterflyPosition.z), 0.1f);
-				horse.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(horsePosition, new Vector3 (horsePosition.x, -40f, horsePosition.z), 0.1f);
-				whale.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(whalePosition, new Vector3 (whalePosition.x, -40f, whalePosition.z), 0.1f);
-				animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3 (animalSelectorPosition.x, 0f, animalSelectorPosition.z), 0.1f);
+				butterfly.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(butterflyPosition, new Vector3 (butterflyPosition.x, -100f, butterflyPosition.z), 0.1f);
+				horse.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(horsePosition, new Vector3 (horsePosition.x, -100f, horsePosition.z), 0.1f);
+				whale.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(whalePosition, new Vector3 (whalePosition.x, -100f, whalePosition.z), 0.1f);
+				animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3 (animalSelectorPosition.x, -100f, animalSelectorPosition.z), 0.1f);
 				menuSelector.SetActive(false);
 
 			}
 		}
 
 		if (settingsWasClicked) {
-			settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D = Vector3.Lerp (settingsSelectorPosition, new Vector3 (-480f, -480f, settingsSelectorPosition.z), 0.1f);
+			settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D = Vector3.Lerp (settingsSelectorPosition, new Vector3 (-520f, -520f, settingsSelectorPosition.z), 0.1f);
 		} else {
 			settingsSelector.GetComponent<RectTransform> ().anchoredPosition3D = Vector3.Lerp (settingsSelectorPosition, new Vector3 (-100f, -100f, settingsSelectorPosition.z), 0.1f);
 		}
 
-		if (whaleWasClicked) {
-			animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3(whalePosition.x, animalSelectorPosition.y, animalSelectorPosition.z), 0.2f);
+		if (whaleWasClicked && menuUp) {
+			animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3(whalePosition.x, whalePosition.y, animalSelectorPosition.z), 0.2f);
 		}
 
-		if (horseWasClicked) {
-			animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3(horsePosition.x, animalSelectorPosition.y, animalSelectorPosition.z), 0.2f);
+		if (horseWasClicked && menuUp) {
+			animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3(horsePosition.x, horsePosition.y, animalSelectorPosition.z), 0.2f);
 		}
 
-		if (butterflyWasClicked) {
-			animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3(butterflyPosition.x, animalSelectorPosition.y, animalSelectorPosition.z), 0.2f);
+		if (butterflyWasClicked && menuUp) {
+			animalSelector.GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(animalSelectorPosition, new Vector3(butterflyPosition.x, butterflyPosition.y, animalSelectorPosition.z), 0.2f);
 		}
 	}
 	
